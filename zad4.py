@@ -6,15 +6,36 @@ def print_board(board):
         print(row, sep='\n')
 
 
-N = 8
+N = 7
 board = [[0 for _ in range(N)] for _ in range(N)]
-print_board(board)
-moves = [(-2, 1), (-1, 2), (1, 2), (2, 1), (-2, -1), (-1, -2), (1, -2), (2, 1)]
 
 
-def fill_board(board, moves, coords, counter):
-    if counter == N*N:
+def fill_board(board, move, coords, counter):
+    moves = [(-2, 1), (-1, 2), (1, 2), (2, 1),
+             (-2, -1), (-1, -2), (1, -2), (2, -1)]
+
+    if counter == N*N + 1:
         return True
 
+    b, a = coords
+    y, x = move
+    if b+y >= 0 and a+x >= 0 and b+y < N and a+x < N and board[b+y][a+x] == 0:
+        board[b+y][a+x] = counter
+        coords = (b+y, a+x)
+        counter += 1
+    else:
+        return False
 
-fill_board(board, moves, 0)
+    # if counter == N*N:
+    #     return True
+
+    for m in moves:
+        if (fill_board(board, m, coords, counter)):
+            return True
+    counter -= 1
+    board[b+y][a+x] = 0
+    return False
+
+
+print(fill_board(board, (0, 0), (0, 0), 1))
+print_board(board)
