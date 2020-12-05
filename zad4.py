@@ -14,7 +14,7 @@ moves = [(-2, 1), (-1, 2), (1, 2), (2, 1), (-2, -1), (-1, -2), (1, -2), (2, 1)]
 
 def fill_board(board, moves, coords, counter):
     if counter == N*N:
-        return board
+        return True
 
 
 fill_board(board, moves, 0)
