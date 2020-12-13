@@ -33,7 +33,7 @@ def all_bin_count(a, b):
     def bin_rec(A, B, res=''):
         nonlocal count
         if A == 0 and B == 0:
-            if is_prime(bin_to_dec('1'+res)) == False:
+            if is_prime(bin_to_dec('1'+res)) is False:
                 count += 1
                 print('1'+res)
             return
